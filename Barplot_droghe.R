@@ -7,7 +7,6 @@ summary(data)
 nome_colonne<-c("ID","Age","Gender","Alcohol","Amphet","Amyl","Benzos","Caff","Cannabis","Choc","Coke","Crack","Ecstasy","Heroin","Ketamine","Legalh","LSD","Meth","Mushrooms","Nicotine","Semer","VSA")
 
 
-
 #Acquisisco il genere Y
 genereY<-subset(tabella, Gender== -0.48246)
 View(genereY)
@@ -35,15 +34,37 @@ View(range5)
 range6<-subset(genereY, Age==2.59171)
 View(range6)
 
+
+
+#funzione di sostituzione dei valori LC presenti nel dataframe in valori numeri
+sostituisci_livelli <- function(data, colonne) {
+  
+  # Definisco la mappatura dei livelli
+  mappa_livelli <- c("CL0" = 0, "CL1" = 1, "CL2" = 2,"CL3" = 3, "CL4" = 4, "CL5" = 5, "CL6" = 6)
+  
+  # Applica la mappatura alle colonne selezionate
+  data[colonne] <- lapply(data[colonne], function(colonna) {
+    as.numeric(mappa_livelli[as.character(colonna)])
+  })
+  
+  return(data)
+}
+nome_droghe<-c("Alcohol","Amphet","Amyl","Benzos","Caff","Cannabis","Choc","Coke","Crack","Ecstasy","Heroin","Ketamine","Legalh","LSD","Meth","Mushrooms","Nicotine","Semer","VSA")
+
+range1<-sostituisci_livelli(range1,nome_droghe)
+droghe<-as.data.frame(range1)
+droghe<-droghe[-(1:3)]
+barplot(droghe,main="Assunzione di droghe per uomini da 18-24 anni",cex.names = 0.4, ylab="Quantità",xlab="Droghe",col = rainbow(7),beside = TRUE)
 #conta le occorenze di ogni colonna nel dataframe, il paramentro 2 stabilisce le colonne(1 righe)
 tabella_droghe<- apply(range1,2, table)
 #Cancello dalla lista le prime 3 righe
 tabella_droghe<-tabella_droghe[-(1:3)]
 
 
-
-View(tabella_droghe)
-#Alcohol<-table(range1$Alcohol)
+Alcohol<-table(range1$Alcohol)
+Alcohol <- as.data.frame(Alcohol,name)
+View(Alcohol)
+barplot(Alcohol,main="Assunzione di alcohol",col=rainbow(6))
 # tabella_droghe[,"Alcohol"]<-Alcohol
 # View(tabella_droghe)
 # Amphet<-table(range1$Amphet)
