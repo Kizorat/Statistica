@@ -1,0 +1,18 @@
+Codifiche per effettuare un bar plot iniziale in base all'età e al cosumo di droga.
+
+
+La suddivisione andrà in base al livello del consumo della droga che è nel dataset calssificato come: CL/0,1,2,3,4,5,6 (dal basso verso l'alto l'utilizzo aumenta).
+Ma verrà agglomerato in un uso:
+Frequente: CL6
+abbastanza frequente CL5,CL4
+poco frequente/occasionale/NON utilizzato: CL3,CL2,CL1,CL0. (con e senza per veder l'impatto complessivo)
+
+La suddivisione è stata pensata tale per capire l'iniziale impatto della droga sulle rispettive fasce d'età per poi proseguire in altre direzioni più specifiche.
+
+
+Altre possibili implicazioni future: 
+Idee:
+
+Relazione tra surrogati e droghe pure: es Ketamina e VSA (Cluster)
+In modo sommario c1 pure ... c2 surrogate
+In modo specifico c1 pure rilevanti ... c2 surrogate rilevanti (CON CORRISPETTIVE RELAZIONI)
