@@ -1,3 +1,11 @@
+Quello che a noi interessa valutare sono le consumazioni più importanti di queste droghe in base allo spettro caratteriale.
+Per poi valuare le differenze tra i due sessi.
+Dalla nostra analisi risulterà che le 4 droghe surrogate sono quali completamente in disuso.
+PROSSIMA ANALISI:
+differenza in percentruale della pura rispetto alla surrogata
+
+
+
 Pure&Surrogate:
 
 In base al nostro dataset le differenti 18 droghe si possono dividere in:
@@ -30,5 +38,3 @@ VSA (Volatile Substance Abuse, inalanti come colla o solventi, surrogate)
 
 
 ###
-Quello che a noi interessa valutare sono le consumazioni più importanti di queste droghe in base allo spettro caratteriale.
-Per poi valuare le differenze tra i due sessi.
