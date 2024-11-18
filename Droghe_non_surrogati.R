@@ -23,10 +23,11 @@ sub_data<-subset(data,select = c(Alcohol,Amphet,Amyl,Benzos,Caff,Cannabis,Choc,C
 #trasformo il dataset in dataframe
 as.data.frame(sub_data)
 
-#Alcolici media,mediana,moda
+#Alcolici media,mediana,e quartile moda
 median(sub_data$Alcohol)
 mean(sub_data$Alcohol)
 table(sub_data$Alcohol)
+quantile(sub_data$Alcohol)
 
 #Amphet media,mediana,moda
 median(sub_data$Amphet)
@@ -98,12 +99,81 @@ median(sub_data$Nicotine)
 mean(sub_data$Nicotine)
 table(sub_data$Nicotine)
 
+#calcolo delle mediane
+mediana_ordinate<-apply(sub_data, 2, median)
+sort(mediana_ordinate,decreasing = TRUE)
+# Stampa le mediane ordinate
+print(mediana_ordinate)
 
+# Opzionalmente, crea un barplot per visualizzarle
+barplot(mediana_ordinate, 
+        main="Mediane delle Sostanze (dal valore più alto)",
+        ylab="Valore Mediano",
+        las=2,
+        col=rainbow(length(mediana_ordinate)))
 
 #creazione della table dai dati delle droghe non surrogate
 risultati<-lapply(sub_data, table)
 View(risultati)
+#media,mediana e quantili delle sigole droghe nella variabile risultati
+median(risultati$Alcohol)
+mean(risultati$Alcohol)
+quantile(risultati$Alcohol)
 
+median(risultati$Amphet)
+mean(risultati$Amphet)
+quantile(risultati$Amphet)
 
+median(risultati$Amyl)
+mean(risultati$Amyl)
+quantile(risultati$Amyl)
+
+median(risultati$Benzos)
+mean(risultati$Benzos)
+quantile(risultati$Benzos)
+
+median(risultati$Caff)
+mean(risultati$Caff)
+quantile(risultati$Caff)
+
+median(risultati$Cannabis)
+mean(risultati$Cannabis)
+quantile(risultati$Cannabis)
+
+median(risultati$Choc)
+mean(risultati$Choc)
+quantile(risultati$Choc)
+
+median(risultati$Coke)
+mean(risultati$Coke)
+quantile(risultati$Coke)
+
+median(risultati$Ecstasy)
+mean(risultati$Ecstasy)
+quantile(risultati$Ecstasy)
+
+median(risultati$Heroin)
+mean(risultati$Heroin)
+quantile(risultati$Heroin)
+
+median(risultati$Ketamine)
+mean(risultati$Ketamine)
+quantile(risultati$Ketamine)
+
+median(risultati$LSD)
+mean(risultati$LSD)
+quantile(risultati$LSD)
+
+median(risultati$Meth)
+mean(risultati$Meth)
+quantile(risultati$Meth)
+
+median(risultati$Mushrooms)
+mean(risultati$Mushrooms)
+quantile(risultati$Mushrooms)
+
+median(risultati$Nicotine)
+mean(risultati$Nicotine)
+quantile(risultati$Nicotine)
 #creaziione del boxplot
 boxplot(risultati,"Sostanze non surrogate",ylab="valore",las=2,col=rainbow(15),ylim=c(0,1885))
