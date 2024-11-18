@@ -1,0 +1,34 @@
+Pure&Surrogate:
+
+In base al nostro dataset le differenti 18 droghe si possono dividere in:
+
+
+DROGHE PURE:
+Alcohol - puro
+Amphet (Amfetamina) - puro
+Amyl (Amile, solitamente riferito ai nitriti di amile) - puro
+Benzos (Benzodiazepine) - puro
+Caff (Caffeina) - puro
+Cannabis - puro
+Choc (Cioccolato, a volte considerato per la presenza di teobromina) - puro
+Coke (Cocaina) - puro
+Ecstasy (MDMA) - puro
+Heroin - puro
+Ketamine - puro
+LSD - puro
+Meth (Metamfetamina) - puro
+Mushrooms (Psilocibina) - puro
+Nicotine - puro
+
+
+DROHE SURROGATE:
+Crack (variante della cocaina, considerata surrogata)
+Legalh (Legal highs, droghe sintetiche legali, surrogate)
+Semer (Non è una droga standard conosciuta, ma potrebbe riferirsi a sostanze sintetiche o sperimentali, surrogate)
+VSA (Volatile Substance Abuse, inalanti come colla o solventi, surrogate)
+
+
+
+###
+Quello che a noi interessa valutare sono le consumazioni più importanti di queste droghe in base allo spettro caratteriale.
+Per poi valuare le differenze tra i due sessi.

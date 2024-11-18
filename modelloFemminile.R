@@ -45,7 +45,7 @@ View(range6)
 #CL2:usato nell'ultima decade(10 anni), CL3: usato nell'ultimo anno, 
 #CL4:usato nell'ultimo mese, CL5:usato nell'ultima settimana, CL6: usato nell'ultimo giorno
 
-#range di età 18-24
+#range di età 18-24 ******************************************************
 tableAlcool1<-table(range1$Alcohol)
 View(tableAlcool1)
 
@@ -61,7 +61,7 @@ View(tableBenzos1)
 tableCaff1<-table(range1$Caff)
 View(tableCaff1)
 
-tableAmyl1<-table(range1$Amyl)
+tableCannabis1<-table(range1$Amyl)
 View(tableCannabis1)
 
 tableChoc1<-table(range1$Choc)
@@ -102,10 +102,7 @@ View(tableSemer1)
 
 tableVSA1<-table(range1$VSA)
 View(tableVSA1)
-
-
-
-#range di età 25-34 
+#range di età 25-34 ******************************************************
 tableAlcool2 <- table(range2$Alcohol)
 View(tableAlcool2)
 
@@ -121,8 +118,8 @@ View(tableBenzos2)
 tableCaff2 <- table(range2$Caff)
 View(tableCaff2)
 
-tableAmyl2 <- table(range2$Amyl) 
-View(tableAmyl2)
+tableCannabis2 <- table(range2$Cannabis) 
+View(tableCannabis2)
 
 tableChoc2 <- table(range2$Choc)
 View(tableChoc2)
@@ -162,9 +159,7 @@ View(tableSemer2)
 
 tableVSA2 <- table(range2$VSA)
 View(tableVSA2)
-
-
-#range di età 34-44 
+#range di età 34-44 ******************************************************
 tableAlcool3 <- table(range3$Alcohol)
 View(tableAlcool3)
 
@@ -180,7 +175,7 @@ View(tableBenzos3)
 tableCaff3 <- table(range3$Caff)
 View(tableCaff3)
 
-tableAmyl3 <- table(range3$Amyl)  # Nota che questa era la stessa variabile di sopra, probabilmente c'è un errore nei dati
+tableAmyl3 <- table(range3$Amyl)
 View(tableAmyl3)
 
 tableChoc3 <- table(range3$Choc)
@@ -221,9 +216,7 @@ View(tableSemer3)
 
 tableVSA3 <- table(range3$VSA)
 View(tableVSA3)
-
-
-#range di età 45-54 
+#range di età 45-54 ******************************************************
 tableAlcool4 <- table(range4$Alcohol)
 View(tableAlcool4)
 
@@ -239,7 +232,7 @@ View(tableBenzos4)
 tableCaff4 <- table(range4$Caff)
 View(tableCaff4)
 
-tableAmyl4 <- table(range4$Amyl)  # Nota che questa era la stessa variabile di sopra, probabilmente c'è un errore nei dati
+tableAmyl4 <- table(range4$Amyl)  
 View(tableAmyl4)
 
 tableChoc4 <- table(range4$Choc)
@@ -280,9 +273,7 @@ View(tableSemer4)
 
 tableVSA4 <- table(range4$VSA)
 View(tableVSA4)
-
-
-#range di età 55-65
+#range di età 55-65 ******************************************************
 tableAlcool5 <- table(range5$Alcohol)
 View(tableAlcool5)
 
@@ -298,7 +289,7 @@ View(tableBenzos5)
 tableCaff5 <- table(range5$Caff)
 View(tableCaff5)
 
-tableAmyl5 <- table(range5$Amyl)  # Nota che questa era la stessa variabile di sopra, probabilmente c'è un errore nei dati
+tableAmyl5 <- table(range5$Amyl)  
 View(tableAmyl5)
 
 tableChoc5 <- table(range5$Choc)
@@ -339,10 +330,7 @@ View(tableSemer5)
 
 tableVSA5 <- table(range5$VSA)
 View(tableVSA5)
-
-
-
-#range di età 65+
+#range di età 65+ ******************************************************
 tableAlcool6 <- table(range6$Alcohol)
 View(tableAlcool6)
 
@@ -358,7 +346,7 @@ View(tableBenzos6)
 tableCaff6 <- table(range6$Caff)
 View(tableCaff6)
 
-tableAmyl6 <- table(range6$Amyl)  # Nota che questa era la stessa variabile di sopra, probabilmente c'è un errore nei dati
+tableAmyl6 <- table(range6$Amyl)  
 View(tableAmyl6)
 
 tableChoc6 <- table(range6$Choc)
@@ -400,14 +388,17 @@ View(tableSemer6)
 tableVSA6 <- table(range6$VSA)
 View(tableVSA6)
 
-
-#
-elenco1 <- c()
-
-
-# Definire le colonne delle droghe
-#droghe <- colnames(GenderX)[4:23]
-
+#modifica dei CL in valori numerici:
+convertitore_CL<-function(x){
+  if(is.character((x)))
+      return(as.numeric(sub("CL","",x)))
+  return(x)
+}
+#passaggio delle colonne
+for(col in names(data)){
+  data[[col]]<-convertitore_CL(data[[col]])
+}
+View(data)
 
 
 
