@@ -45,12 +45,31 @@ View(Alcohol)
 #Converto la table in un data frame
 datframe_Alchol<-as.data.frame(Alcohol)
 #Rinomino i nomi delle colonne
-colnames(datframe_Alchol)<-c("Consumo","Frequenza")
+colnames(datframe_Alchol)<-c("Consumo","Alcohol")
 #Inserisco tra CL0 e CL2, il valore CL1 con risultato per le frequenze a 0
-datframe_Alchol<-rbind(datframe_Alchol[1,],data.frame(Consumo="CL1",Frequenza=0),datframe_Alchol[2:nrow(datframe_Alchol),])
+datframe_Alchol<-rbind(datframe_Alchol[1,],data.frame(Consumo="CL1",Alcohol=0),datframe_Alchol[2:nrow(datframe_Alchol),])
+#datframe_Alchol<-as.matrix(datframe_Alchol)
+View(datframe_Alchol)
+View(datframe_Alchol)
+
+
+
+
+Amphet<-table(range1$Amphet)
+datframe_Amphet<-as.data.frame(Amphet)
+colnames(datframe_Amphet)<-c("Consumo","Amphet")
+View(datframe_Amphet)
+#datframe_Alchol<-cbind(datframe_Alchol,datframe_Amphet$Amphet)
+#colnames(datframe_Alchol)[ncol(datframe_Alchol)] <- "Amphet"
 
 View(datframe_Alchol)
-Amphet<-table(range1$Amphet)
+
+droghe_finale<-data.frame(datframe_Alchol$Alcohol,datframe_Amphet$Amphet)
+View(droghe_finale)
+View(as.matrix(droghe_finale))
+barplot(as.matrix(droghe_finale),main="Grafico degli alcolisti uomini",col=c("red","yellow","blue","green","brown","purple","pink"),ylim = c(0,600),legend.text =rownames(droghe_finale)-1)
+
+
 View(Amphet)
 Amyl<-table(range1$Amyl)
 View(Amyl)
@@ -58,7 +77,9 @@ Benzos<-table(range1$Benzos)
 View(Benzos)
 Caff<-table(range1$Caff)
 View(Caff)
-# Cannabis<-table(range1$Cannabis)
+Cannabis<-table(range1$Cannabis)
+View(Cannabis)
+
 # Choc<-table(range1$Choc)
 # Coke<-table(range1$Coke)
 # Crack<-table(range1$Crack)
