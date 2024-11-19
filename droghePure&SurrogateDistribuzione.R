@@ -30,8 +30,26 @@ View(tableDrugSurrogate)
 applaySurrogate<-lapply(tableDrugSurrogate,table)
 View(applaySurrogate)
 
-boxplot(applaySurrogate,"sostanze surrogate",ylab="valore",las=2,col=c("red","green","blue","purple"))
+##VISIONE GRAFICO INVERSO 
+#speigazione della distribuzione in maniera inversa cioè quanti non la utilizzano rispetto a chi la utilizza
+tableSurrogatoXX<-c("Crack","Legalh","Semer","VSA")
+tableDrugSurrogateXX<-data[,tableSurrogatoXX]
+View(tableSXX)
+boxplot(las=2,"valore",ylab="sostanze surrogate",applaySurrogate,col=c("red","green","blue","purple"))
+
+
+
+
+
+
+
+
+
+boxplot(applaySurrogate,"valore",ylab="sostanze surrogate",las=2,col=c("red","green","blue","purple"))
 legend("left",1,1885,legend=c("Crack","Legalh","Semer","VSA"),col=c("red","green","blue","purple"),lty=1:1,cex = 0.6, xpd = TRUE)
+
+boxplot(applaySurrogate,"valore",ylab="sostanze surrogate",las=2,col=c("red","green","blue","purple"))
+#legend("left",1885,1,legend=c("Crack","Legalh","Semer","VSA"),col=c("red","green","blue","purple"),lty=1:1,cex = 0.6, xpd = TRUE)
 
 #media mediana Crack
 median(tableDrugSurrogate$Crack)
@@ -68,7 +86,7 @@ crea_barplot_con_picchi <- function(data, nome_sostanza) {
   # Calcolare media e mediana
   media <- mean(data)
   mediana <- median(data)
-  #quartili <- quantile(data)
+  quartili <- quantile(data)
   
   # Creare il barplot
   barplot(data, col = "lightblue", main = paste("Distribuzione:", nome_sostanza),
@@ -77,11 +95,11 @@ crea_barplot_con_picchi <- function(data, nome_sostanza) {
   # Aggiungere le linee per la media e la mediana
   abline(h = media, col = "red", lwd = 2, lty = 2)   # Linea rossa per la media
   abline(h = mediana, col = "green", lwd = 2, lty = 2)  # Linea verde per la mediana
-  #abline(h = quartili, col = "blue",lwd = 2, lty = 2) #La linea blu indica i quartili
+  abline(h = quartili, col = "blue",lwd = 2, lty = 2) #La linea blu indica i quartili
   
   # Aggiungere una legenda
   legend("topright", legend = c(paste("Media =", round(media, 2)), paste("Mediana =", round(mediana, 2))
-                                #, paste("Quartili =", round(quartili, 2))
+                                , paste("Quartili =", round(quartili, 2))
                                 ),
          col = c("red", "green","blue"), lty = 2, lwd = 2)
 }
