@@ -15,8 +15,7 @@ for (col in names(data)) {
 }
 #verifico che la funzione è andata a buon fine
 head(data)
-#calcolo della media,mediana,moda di tutte le droghe
-as.
+
 
 #prendo tutte le droghe che non sono surrogati
 sub_data<-subset(data,select = c(Alcohol,Amphet,Amyl,Benzos,Caff,Cannabis,Choc,Coke,Ecstasy,Heroin,Ketamine,LSD,Meth,Mushrooms,Nicotine))
@@ -175,5 +174,18 @@ quantile(risultati$Mushrooms)
 median(risultati$Nicotine)
 mean(risultati$Nicotine)
 quantile(risultati$Nicotine)
+
+summary(risultati)
+
+#seleziona le colonne numeriche
+#risultati_numerici<-risultati[sapply(risultati,is.numeric)]
+
+#boxplot_stats <- lapply(risultati_numerici, boxplot.stats)
+
+#View(boxplot_stats)
 #creaziione del boxplot
-boxplot(risultati,"Sostanze non surrogate",ylab="valore",las=2,col=rainbow(15),ylim=c(0,1885))
+boxplot(risultati,notch = FALSE,main="Sostanze non surrogate",ylab="Frequenza assoluta",las=2,col=rainbow(15))
+legend("topright",legend = c("Alcohol","Amphet","Amyl","Benzos","Caff","Cannabis","Choc","Coke","Ecstasy","Heroin","Ketamine","LSD","Meth","Mushrooms","Nicotine"),fill = rainbow(15),inset = c(0,-0.3),xpd = TRUE,cex = 0.5,ncol = 8)
+#creazione di un dataframe formato dai soli utilizzatori di droga
+
+
