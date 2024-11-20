@@ -114,11 +114,12 @@ cannabis_data <- table(sub_data$Cannabis)
 choc_data <- table(sub_data$Choc)
 coke_data <- table(sub_data$Coke)  
 ecstasy_data <- table(sub_data$Ecstasy)
-heroin_data <- table(sub_data$Heroine)
+heroin_data <- table(sub_data$Heroin)
 ketamine_data <- table(sub_data$Ketamine)
 LSD_data <- table(sub_data$LSD)
 meth_data <- table(sub_data$Meth)
-nicotine_data <- table(sub_data$Nicorine) 
+mushrooms_data<-table(sub_data$Mushrooms)
+nicotine_data <- table(sub_data$Nicotine) 
 
 
 
@@ -179,4 +180,3 @@ crea_barplot_con_picchi(LSD_data, "LSD")
 crea_barplot_con_picchi(meth_data, "Meth")
 crea_barplot_con_picchi(mushrooms_data, "Mushrooms")
 crea_barplot_con_picchi(nicotine_data, "Nicotine")  
-##eroina,funghi,nicotina
