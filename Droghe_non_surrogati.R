@@ -177,11 +177,11 @@ quantile(risultati$Nicotine)
 
 summary(risultati)
 
-#seleziona le colonne numeriche
-#risultati_numerici<-risultati[sapply(risultati,is.numeric)]
+#eleziona le colonne numeriche
+risultati_numerici<-risultati[sapply(risultati,is.numeric)]
 
-#boxplot_stats <- lapply(risultati_numerici, boxplot.stats)
-
+boxplot_stats <- lapply(risultati_numerici, boxplot.stats)
+View(boxplot_stats)
 #View(boxplot_stats)
 #creaziione del boxplot
 boxplot(risultati,notch = FALSE,main="Sostanze non surrogate",ylab="Frequenza assoluta",las=2,col=rainbow(15))

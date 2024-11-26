@@ -103,6 +103,42 @@ mean(risultati$Nicotine)
 quantile(risultati$Nicotine)
 table(sub_data$Nicotine)
 
+
+
+
+#creazione delle tabelle per le singole consumazioni
+alcohol_data <- table(sub_data$Alcohol)
+amphet_data <- table(sub_data$Amphet)
+amyl_data <- table(sub_data$Amyl)
+benzos_data <- table(sub_data$Benzos)
+caff_data <- table(sub_data$Caff)
+cannabis_data <- table(sub_data$Cannabis)
+choc_data <- table(sub_data$Choc)
+coke_data <- table(sub_data$Coke)  
+ecstasy_data <- table(sub_data$Ecstasy)
+heroin_data <- table(sub_data$Heroin)
+ketamine_data <- table(sub_data$Ketamine)
+LSD_data <- table(sub_data$LSD)
+meth_data <- table(sub_data$Meth)
+mushrooms_data<-table(sub_data$Mushrooms)
+nicotine_data <- table(sub_data$Nicotine) 
+
+
+
+
+#calcolo delle mediane
+mediana_ordinate<-apply(sub_data, 2, median)
+sort(mediana_ordinate,decreasing = TRUE)
+# Stampa le mediane ordinate
+print(mediana_ordinate)
+
+# Opzionalmente, crea un barplot per visualizzarle
+barplot(mediana_ordinate, 
+        main="Mediane delle Sostanze (dal valore più alto)",
+        ylab="Valore Mediano",
+        las=2,
+        col=rainbow(length(mediana_ordinate)))
+
 #creazione della table dai dati delle droghe non surrogate
 risultati<-lapply(sub_data, table)
 View(risultati)
