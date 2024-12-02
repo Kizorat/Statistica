@@ -14,23 +14,20 @@ View(table(n_Eta))
 table_Eta<-table(n_Eta)
 
 
-dev.new()
+
 png("Age_bar_chart.png", width = 800, height = 800, res = 150)
 
 barplot(table_Eta,col =c("green","blue","violet","red","yellow","grey"))
-dev.off()
-##########
 
-##########
+
 
 
 # Creare un file PNG con risoluzione aumentata
 
-dev.new()
 png("Age_pie_chart.png", width = 800, height = 800, res = 150)
 # Creare il grafico a torta
 pie(table_Eta, col = c("green","blue","violet","red","yellow","grey"),
     main = "Distribuzione delle fasce d'età")
 
 # Chiudere il dispositivo grafico
-dev.off()
+
