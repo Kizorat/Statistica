@@ -6,9 +6,9 @@ data<-read.csv("drug_consumption.csv",sep=",",header = T)
 data$Ethnicity <- ifelse(data$Ethnicity == "-0.50212", "Asiatici",
                        ifelse(data$Ethnicity == "-1.10702", "Neri",
                               ifelse(data$Ethnicity == "1.90725", "Neri/Asiatici",
-                                     ifelse(data$Ethnicity == "0.12600", "Bianchi/Asiatici",
+                                     ifelse(data$Ethnicity == "0.126", "Bianchi/Asiatici",
                                             ifelse(data$Ethnicity == "-0.22166", "Bianchi/Neri",
-                                                   ifelse(data$Ethnicity == "0.11440", "Altri",
+                                                   ifelse(data$Ethnicity == "0.1144", "Altri",
                                                           ifelse(data$Ethnicity == "-0.31685", "Bianchi",
                                                                  data$Ethnicity))))))) # Mantieni il valore originale per altri casi
 View(data)
@@ -43,7 +43,7 @@ pie(tableEtnia,
     main = "Distribuzione dell'Etnia",  # Titolo del grafico
     labels = my_labels,  # Etichette personalizzate
     cex = 0.6,  # Riduzione della dimensione del testo
-    radius=1
+    radius=1.1
 )
 
 

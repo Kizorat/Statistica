@@ -47,7 +47,7 @@ my_labels <- paste0(names(tablePaesi), " (", percentages, "%)")
 # Creazione del grafico a torta
 pie(tablePaesi,
     col = c("orange", "green", "blue", "violet", "red", "yellow", "skyblue"),  # Colori per ogni etnia
-    main = "Distribuzione dell'Etnia",  # Titolo del grafico
+    main = "Distribuzione dei Paesi",  # Titolo del grafico
     labels = my_labels,  # Etichette personalizzate
     cex = 0.6,  # Riduzione della dimensione del testo
     radius=1

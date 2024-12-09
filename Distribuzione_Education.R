@@ -16,12 +16,12 @@
   # grafico a barre
   #png("Scuola_bar_chart.png", width = 800, height = 800, res = 150)
   
-  plot(tableTitolo,xlab="Livello di studio posseduto.",col =c("orange","pink","coral","green","blue","violet","red","yellow","grey"),ylim =c(0,800))
+  barplot(tableTitolo,xlab="Livello di studio posseduto.",col =c("orange","pink","coral","green","blue","violet","red","skyblue","grey"),ylim =c(0,800))
   
   # grafico a torta
   #png("Scuola_pie_chart.png", width = 800, height = 800, res = 150)
   
-  pie(tableTitolo, col = c("orange","pink","coral","green","blue","violet","red","yellow","grey"),
+  pie(tableTitolo, col = c("orange","pink","coral","green","blue","violet","red","skyblue","grey"),
       main = "Distribuzione dell'educazione scolastica")
   
   
@@ -33,7 +33,7 @@
   
   # Creazione del grafico a torta
   pie(tableTitolo,
-      col = c("orange", "green", "blue", "violet", "red", "yellow", "skyblue"),  # Colori per ogni etnia
+      col = c("orange","pink" ,"green", "blue", "brown", "red", "yellow", "skyblue","grey"),  # Colori per ogni etnia
       main = "Distribuzione del titolo di studio",  # Titolo del grafico
       labels = my_labels,  # Etichette personalizzate
       cex = 0.8  # Riduzione della dimensione del testo
