@@ -36,3 +36,20 @@ barplot(tablePaesi,col =c("orange","green","blue","violet","red","yellow","grey"
 #png("Paesi_pie_chart.png", width = 800, height = 800, res = 150)
 pie(tablePaesi, col = c("orange","green","blue","violet","red","yellow","grey"),
     main = "Distribuzione delle fasce d'età")
+
+
+# Calcolo delle percentuali
+percentages <- round(100 * tablePaesi / sum(tablePaesi), 1)
+
+# Creazione delle etichette
+my_labels <- paste0(names(tablePaesi), " (", percentages, "%)")
+
+# Creazione del grafico a torta
+pie(tablePaesi,
+    col = c("orange", "green", "blue", "violet", "red", "yellow", "skyblue"),  # Colori per ogni etnia
+    main = "Distribuzione dell'Etnia",  # Titolo del grafico
+    labels = my_labels,  # Etichette personalizzate
+    cex = 0.6,  # Riduzione della dimensione del testo
+    radius=1
+)
+

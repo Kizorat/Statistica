@@ -24,3 +24,17 @@
   pie(tableTitolo, col = c("orange","pink","coral","green","blue","violet","red","yellow","grey"),
       main = "Distribuzione dell'educazione scolastica")
   
+  
+  # Calcolo delle percentuali
+  percentages <- round(100 * tableTitolo / sum(tableTitolo), 1)
+  
+  # Creazione delle etichette
+  my_labels <- paste0(names(tableTitolo), " (", percentages, "%)")
+  
+  # Creazione del grafico a torta
+  pie(tableTitolo,
+      col = c("orange", "green", "blue", "violet", "red", "yellow", "skyblue"),  # Colori per ogni etnia
+      main = "Distribuzione del titolo di studio",  # Titolo del grafico
+      labels = my_labels,  # Etichette personalizzate
+      cex = 0.8  # Riduzione della dimensione del testo
+  )
