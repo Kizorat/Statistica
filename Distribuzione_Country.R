@@ -31,13 +31,6 @@ tablePaesi<-table(Paesi)
 barplot(tablePaesi,col =c("orange","green","blue","violet","red","yellow","grey"))
 
 
-
-# grafico a torta
-#png("Paesi_pie_chart.png", width = 800, height = 800, res = 150)
-pie(tablePaesi, col = c("orange","green","blue","violet","red","yellow","grey"),
-    main = "Distribuzione delle fasce d'età")
-
-
 # Calcolo delle percentuali
 percentages <- round(100 * tablePaesi / sum(tablePaesi), 1)
 
