@@ -1,6 +1,9 @@
+
+install.packages("psych")  # Solo se non hai già installato il pacchetto
+library(psych) 
 data<-read.csv("drug_consumption.csv",sep=",",header = T)
-
-
+describe(data)
+colnames(data)<-c()
 
 # Definizione delle fasce di età
 data$Age<- cut(data$Age, breaks = c(-Inf, -0.95197,-0.07854,0.49788,1.09449,1.82213,2.59171, Inf), labels = c("18", "18-24", "25-34", "35-44", "45-54","55-64","65+"),right = FALSE)
@@ -11,6 +14,7 @@ write.csv(data, "drug_consumption_modificato.csv", row.names = FALSE)
 #stampo nuovo csv
 data_modifcato<-read.csv("drug_consumption_modificato.csv",sep=",",header = T)
 View(data_modifcato)
+
 #Acquisisco solo coloro che si trovano in un range di età superiore a 65
 genere_eta<-subset(data_modifcato,data_modifcato$Age>65,select = c(Age,Gender))
 genere_eta2<-subset(data_modifcato,data_modifcato$Age>54 & data_modifcato$Age<65,select = c(Age,Gender))
@@ -24,6 +28,13 @@ View(genere_eta3)
 View(genere_eta4)
 View(genere_eta5)
 View(genere_eta6)
+#Ispezione dei singoli generi per età
+describe(genere_eta)
+describe(genere_eta2)
+describe(genere_eta3)
+describe(genere_eta4)
+describe(genere_eta5)
+describe(genere_eta6)
 #genero una tabella relativi al genere
 conteggio_generi<-table(genere_eta$Gender)
 conteggio_generi2<-table(genere_eta2$Gender)
@@ -31,9 +42,9 @@ conteggio_generi3<-table(genere_eta3$Gender)
 conteggio_generi4<-table(genere_eta4$Gender)
 conteggio_generi5<-table(genere_eta5$Gender)
 conteggio_generi6<-table(genere_eta6$Gender)
+
 View(conteggio_generi)
 View(conteggio_generi2)
-
 #costruzione di un grafico a torta
 pie(conteggio_generi,labels = names(conteggio_generi),main="Grafico sulle categorie di genere di età over 65")
 pie(conteggio_generi2,labels = names(conteggio_generi2),main="Grafico sulle categorie di genere di età compresa tra 55 e 64")
@@ -54,11 +65,11 @@ conteggio_AlcoholU<-table(Alcohol_genereU)
 conteggi_consumi<-rbind(Femminile=conteggio_AlcoholF,Maschile=conteggio_AlcoholU)
 View(conteggi_consumi)
 #creo un barplot del conteggio del consumo degli alcolici
-barplot(conteggi_consumi,main="Confronto dei consumi tra generi",xlab = "Tipo di consumo",ylab = "Frequenza",col = c("pink","blue"),legend.text = rownames(conteggi_consumi),args.legend = list(title = "Genere", x = "topright"),ylim = c(0,1200))
+barplot(conteggi_consumi,beside = TRUE,main="Confronto dei consumi tra generi",xlab = "Tipo di consumo",ylab = "Frequenza",col = c("pink","blue"),legend.text = rownames(conteggi_consumi),args.legend = list(title = "Genere", x = "topleft"),ylim = c(0,500))
 
 -----------------------------------------
-  #aquisisco il genere femminile  
-  Amphet_genereF<-subset(data_modifcato,data_modifcato$Gender=="Femmina",select = c(Gender,Amphet))
+#aquisisco il genere femminile  
+Amphet_genereF<-subset(data_modifcato,data_modifcato$Gender=="Femmina",select = c(Gender,Amphet))
 #aquisisco il genere maschile
 Amphet_genereU<-subset(data_modifcato,data_modifcato$Gender=="Maschio",select = c(Gender,Amphet))
 #creo una table sia per genere maschile che femminile
@@ -68,23 +79,22 @@ conteggio_AmphetU<-table(Amphet_genereU)
 conteggi_consumi2<-rbind(Femminile=conteggio_AmphetF,Maschile=conteggio_AmphetU)
 View(conteggi_consumi2)
 #creo un barplot del conteggio del consumo delle amphet
-barplot(conteggi_consumi2,main="Confronto dei consumi tra generi",xlab = "Tipo di consumo",ylab = "Frequenza",col = c("pink","blue"),legend.text = rownames(conteggi_consumi2),args.legend = list(title = "Genere", x = "topright"),ylim = c(0,1200))
+barplot(conteggi_consumi2,beside = TRUE,main="Confronto dei consumi tra generi",xlab = "Tipo di consumo",ylab = "Frequenza",col = c("pink","blue"),legend.text = rownames(conteggi_consumi2),args.legend = list(title = "Genere", x = "topright"),ylim = c(0,600))
 ----------------------------------------------------
-  
-  #manca cl 6 per il genere maschile 6  
   
   #aquisisco il genere femminile  
   Amyl_genereF<-subset(data_modifcato,data_modifcato$Gender=="Femmina",select = c(Gender,Amyl))
 #aquisisco il genere maschile
 Amyl_genereU<-subset(data_modifcato,data_modifcato$Gender=="Maschio",select = c(Gender,Amyl))
+categorie_comuni3 <- union(unique(Amyl_genereF$Amyl), unique(Amyl_genereU$Amyl))
 #creo una table sia per genere maschile che femminile
-conteggio_AmylF<-table(Amyl_genereF)
-conteggio_AmylU<-table(Amyl_genereU)
+conteggio_AmylF<-table(factor(Amyl_genereF$Amyl,levels = categorie_comuni3))
+conteggio_AmylU<-table(factor(Amyl_genereU$Amyl, levels=categorie_comuni3))
 #inserisco in una singola table i valori ripettivi alla frequenza delle due table
 conteggi_consumi3<-rbind(Femminile=conteggio_AmylF,Maschile=conteggio_AmylU)
 View(conteggi_consumi3)
 #creo un barplot del conteggio del consumo delle amphet
-boxplot(conteggi_consumi3,main="Confronto dei consumi tra generi",xlab = "Tipo di consumo",ylab = "Frequenza",col = c("pink","blue"),legend.text = rownames(conteggi_consumi3),args.legend = list(title = "Genere", x = "topright"),ylim = c(0,1200))
+barplot(conteggi_consumi3,beside=TRUE,main="Confronto dei consumi tra generi",xlab = "Tipo di consumo",ylab = "Frequenza",col = c("pink","blue"),legend.text = rownames(conteggi_consumi3),args.legend = list(title = "Genere", x = "topright"),ylim = c(0,800))
 ----------------------------------------------------
   #aquisisco il genere femminile  
   Benzos_genereF<-subset(data_modifcato,data_modifcato$Gender=="Femmina",select = c(Gender,Benzos))
@@ -97,7 +107,7 @@ conteggio_BenzosU<-table(Benzos_genereU)
 conteggi_consumi4<-rbind(Femminile=conteggio_BenzosF,Maschile=conteggio_BenzosU)
 View(conteggi_consumi4)
 #creo un barplot del conteggio del consumo delle amphet
-barplot(conteggi_consumi4,main="Confronto dei consumi tra generi",xlab = "Tipo di consumo",ylab = "Frequenza",col = c("pink","blue"),legend.text = rownames(conteggi_consumi4),args.legend = list(title = "Genere", x = "topright"),ylim = c(0,1200))
+barplot(conteggi_consumi4,beside = TRUE,main="Confronto dei consumi tra generi",xlab = "Tipo di consumo",ylab = "Frequenza",col = c("pink","blue"),legend.text = rownames(conteggi_consumi4),args.legend = list(title = "Genere", x = "topright"),ylim = c(0,600))
 ----------------------------------------------
   #aquisisco il genere femminile  
   Caff_genereF<-subset(data_modifcato,data_modifcato$Gender=="Femmina",select = c(Gender,Caff))
@@ -110,7 +120,7 @@ conteggio_CaffU<-table(Caff_genereU)
 conteggi_consumi5<-rbind(Femminile=conteggio_CaffF,Maschile=conteggio_CaffU)
 View(conteggi_consumi5)
 #creo un barplot del conteggio del consumo delle amphet
-barplot(conteggi_consumi5,main="Confronto dei consumi tra generi",xlab = "Tipo di consumo",ylab = "Frequenza",col = c("pink","blue"),legend.text = rownames(conteggi_consumi5),args.legend = list(title = "Genere", x = "topleft"),ylim = c(0,1800))
+barplot(conteggi_consumi5,beside=TRUE,main="Confronto dei consumi tra generi",xlab = "Tipo di consumo",ylab = "Frequenza",col = c("pink","blue"),legend.text = rownames(conteggi_consumi5),args.legend = list(title = "Genere", x = "topleft"),ylim = c(0,1000))
 ---------------------------------------------------------------------------
   #aquisisco il genere femminile  
   Cannabis_genereF<-subset(data_modifcato,data_modifcato$Gender=="Femmina",select = c(Gender,Cannabis))
@@ -123,24 +133,26 @@ conteggio_CannabisU<-table(Cannabis_genereU)
 conteggi_consumi6<-rbind(Femminile=conteggio_CannabisF,Maschile=conteggio_CannabisU)
 View(conteggi_consumi6)
 #creo un barplot del conteggio del consumo delle amphet
-barplot(conteggi_consumi6,main="Confronto dei consumi tra generi",xlab = "Tipo di consumo",ylab = "Frequenza",col = c("pink","blue"),legend.text = rownames(conteggi_consumi6),args.legend = list(title = "Genere", x = "topright"),ylim = c(0,800))
+barplot(conteggi_consumi6,beside=TRUE,main="Confronto dei consumi tra generi",xlab = "Tipo di consumo",ylab = "Frequenza",col = c("pink","blue"),legend.text = rownames(conteggi_consumi6),args.legend = list(title = "Genere", x = "topright"),ylim = c(0,500))
 ---------------------------------------------------------------------------
   
-  #aggiungere colonna per la table dichocU  
+ 
   
   
   #aquisisco il genere femminile  
   Choc_genereF<-subset(data_modifcato,data_modifcato$Gender=="Femmina",select = c(Gender,Choc))
 #aquisisco il genere maschile
 Choc_genereU<-subset(data_modifcato,data_modifcato$Gender=="Maschio",select = c(Gender,Choc))
+# Creare le tabelle di frequenza con tutte le categorie presenti
+categorie_comuni <- union(unique(Choc_genereF$Choc), unique(Choc_genereU$Choc))
 #creo una table sia per genere maschile che femminile
-conteggio_ChocF<-table(Choc_genereF)
-conteggio_ChocU<-table(Choc_genereU)
+conteggio_ChocF <- table(factor(Choc_genereF$Choc, levels = categorie_comuni))
+conteggio_ChocU <- table(factor(Choc_genereU$Choc, levels = categorie_comuni))
 #inserisco in una singola table i valori ripettivi alla frequenza delle due table
 conteggi_consumi7<-rbind(Femminile=conteggio_ChocF,Maschile=conteggio_ChocU)
 View(conteggi_consumi7)
 #creo un barplot del conteggio del consumo delle amphet
-barplot(conteggi_consumi7,main="Confronto dei consumi tra generi",xlab = "Tipo di consumo",ylab = "Frequenza",col = c("pink","blue"),legend.text = rownames(conteggi_consumi7),args.legend = list(title = "Genere", x = "topright"),ylim = c(0,800))
+barplot(conteggi_consumi7,beside=TRUE,main="Confronto dei consumi tra generi",xlab = "Tipo di consumo",ylab = "Frequenza",col = c("pink","blue"),legend.text = rownames(conteggi_consumi7),args.legend = list(title = "Genere", x = "topright"),ylim = c(0,500))
 ---------------------------------------------------------------------------
   #aquisisco il genere femminile  
   Coke_genereF<-subset(data_modifcato,data_modifcato$Gender=="Femmina",select = c(Gender,Coke))
@@ -153,22 +165,43 @@ conteggio_CokeU<-table(Coke_genereU)
 conteggi_consumi7<-rbind(Femminile=conteggio_CokeF,Maschile=conteggio_CokeU)
 View(conteggi_consumi7)
 #creo un barplot del conteggio del consumo delle amphet
-barplot(conteggi_consumi7,main="Confronto dei consumi tra generi",xlab = "Tipo di consumo",ylab = "Frequenza",col = c("pink","blue"),legend.text = rownames(conteggi_consumi7),args.legend = list(title = "Genere", x = "topright"),ylim = c(0,1800))
+barplot(conteggi_consumi7,beside=TRUE,main="Confronto dei consumi tra generi",xlab = "Tipo di consumo",ylab = "Frequenza",col = c("pink","blue"),legend.text = rownames(conteggi_consumi7),args.legend = list(title = "Genere", x = "topright"),ylim = c(0,700))
 ---------------------------------------------------------------------------    
-  #inserire due colonne per la table u di crack
+
   
   #aquisisco il genere femminile  
   Crack_genereF<-subset(data_modifcato,data_modifcato$Gender=="Femmina",select = c(Gender,Crack))
 #aquisisco il genere maschile
 Crack_genereU<-subset(data_modifcato,data_modifcato$Gender=="Maschio",select = c(Gender,Crack))
-#creo una table sia per genere maschile che femminile
-conteggio_CrackF<-table(Crack_genereF)
-conteggio_CrackU<-table(Crack_genereU)
+livelli_crack <- union(unique(Crack_genereF$Crack), unique(Crack_genereU$Crack))
+print(livelli_crack)
+# Converti in data.frame con livelli uniformi
+conteggio_CrackF_df <- as.data.frame(table(Crack_genereF))
+conteggio_CrackU_df <- as.data.frame(table(Crack_genereU))
+# Aggiungi livelli mancanti con frequenza 0
+conteggio_CrackF_df <- merge(data.frame(Crack = livelli_crack), conteggio_CrackF_df, by = "Crack", all.x = TRUE)
+conteggio_CrackU_df <- merge(data.frame(Crack = livelli_crack), conteggio_CrackU_df, by = "Crack", all.x = TRUE)
+# Sostituisci NA con 0
+conteggio_CrackF_df$Freq[is.na(conteggio_CrackF_df$Freq)] <- 0
+conteggio_CrackU_df$Freq[is.na(conteggio_CrackU_df$Freq)] <- 0
+# Aggiungi una colonna "Genere" per distinguere i dati
+conteggio_CrackF_df$Gender <- "Femmina"
+conteggio_CrackU_df$Gender <- "Maschio"
+View(conteggio_CrackF_df)
+View(conteggio_CrackU_df)
 #inserisco in una singola table i valori ripettivi alla frequenza delle due table
-conteggi_consumi8<-rbind(Femminile=conteggio_CrackF,Maschile=conteggio_CrackU)
-View(conteggi_consumi8)
+conteggi_consumi8<-rbind(Femminile=conteggio_CrackF_df,Maschile=conteggio_CrackU_df)
+# Creare una tabella aggregata
+conteggi_consumi_wide <- xtabs(Freq ~ Gender + Crack, data = conteggi_consumi8)
+
+# Convertire la tabella in data frame per una visualizzazione migliore
+conteggi_consumi_wide_df <- as.data.frame.matrix(conteggi_consumi_wide)
+
+# Visualizza il risultato
+View(conteggi_consumi_wide_df)
+
 #creo un barplot del conteggio del consumo delle amphet
-barplot(conteggi_consumi8,main="Confronto dei consumi tra generi",xlab = "Tipo di consumo",ylab = "Frequenza",col = c("pink","blue"),legend.text = rownames(conteggi_consumi8),args.legend = list(title = "Genere", x = "topright"),ylim = c(0,1800))
+barplot(as.matrix(conteggi_consumi_wide_df),beside=TRUE,main="Confronto dei consumi tra generi",xlab = "Tipo di consumo",ylab = "Frequenza",col = c("pink","blue"),legend.text = rownames(conteggi_consumi_wide_df),args.legend = list(title = "Genere", x = "topright"),ylim = c(0,1000))
 ---------------------------------------------------------------------------    
   
   #aquisisco il genere femminile  
@@ -182,7 +215,7 @@ conteggio_EcstasyU<-table(Ecstasy_genereU)
 conteggi_consumi9<-rbind(Femminile=conteggio_EcstasyF,Maschile=conteggio_EcstasyU)
 View(conteggi_consumi9)
 #creo un barplot del conteggio del consumo delle amphet
-barplot(conteggi_consumi9,main="Confronto dei consumi tra generi",xlab = "Tipo di consumo",ylab = "Frequenza",col = c("pink","blue"),legend.text = rownames(conteggi_consumi9),args.legend = list(title = "Genere", x = "topright"),ylim = c(0,1800))  
+barplot(conteggi_consumi9,beside = TRUE,main="Confronto dei consumi tra generi",xlab = "Tipo di consumo",ylab = "Frequenza",col = c("pink","blue"),legend.text = rownames(conteggi_consumi9),args.legend = list(title = "Genere", x = "topright"),ylim = c(0,800))  
 ---------------------------------------------------------------------------    
   
   #aquisisco il genere femminile  
@@ -196,7 +229,7 @@ conteggio_HeroinU<-table(Heroin_genereU)
 conteggi_consumi10<-rbind(Femminile=conteggio_HeroinF,Maschile=conteggio_HeroinU)
 View(conteggi_consumi10)
 #creo un barplot del conteggio del consumo delle amphet
-barplot(conteggi_consumi10,main="Confronto dei consumi tra generi",xlab = "Tipo di consumo",ylab = "Frequenza",col = c("pink","blue"),legend.text = rownames(conteggi_consumi10),args.legend = list(title = "Genere", x = "topright"),ylim = c(0,1800))  
+barplot(conteggi_consumi10,beside = TRUE,main="Confronto dei consumi tra generi",xlab = "Tipo di consumo",ylab = "Frequenza",col = c("pink","blue"),legend.text = rownames(conteggi_consumi10),args.legend = list(title = "Genere", x = "topright"),ylim = c(0,1000))  
 
 ---------------------------------------------------------------------------    
   
@@ -211,7 +244,7 @@ conteggio_KetamineU<-table(Ketamine_genereU)
 conteggi_consumi11<-rbind(Femminile=conteggio_KetamineF,Maschile=conteggio_KetamineU)
 View(conteggi_consumi11)
 #creo un barplot del conteggio del consumo delle amphet
-barplot(conteggi_consumi11,main="Confronto dei consumi tra generi",xlab = "Tipo di consumo",ylab = "Frequenza",col = c("pink","blue"),legend.text = rownames(conteggi_consumi11),args.legend = list(title = "Genere", x = "topright"),ylim = c(0,2000))  
+barplot(conteggi_consumi11,beside = TRUE,main="Confronto dei consumi tra generi",xlab = "Tipo di consumo",ylab = "Frequenza",col = c("pink","blue"),legend.text = rownames(conteggi_consumi11),args.legend = list(title = "Genere", x = "topright"),ylim = c(0,1000))  
 
 ---------------------------------------------------------------------------    
   
@@ -226,7 +259,7 @@ conteggio_LegalhU<-table(Legalh_genereU)
 conteggi_consumi12<-rbind(Femminile=conteggio_LegalhF,Maschile=conteggio_LegalhU)
 View(conteggi_consumi12)
 #creo un barplot del conteggio del consumo delle amphet
-barplot(conteggi_consumi12,main="Confronto dei consumi tra generi",xlab = "Tipo di consumo",ylab = "Frequenza",col = c("pink","blue"),legend.text = rownames(conteggi_consumi12),args.legend = list(title = "Genere", x = "topright"),ylim = c(0,1800))  
+barplot(conteggi_consumi12,beside = TRUE,main="Confronto dei consumi tra generi",xlab = "Tipo di consumo",ylab = "Frequenza",col = c("pink","blue"),legend.text = rownames(conteggi_consumi12),args.legend = list(title = "Genere", x = "topright"),ylim = c(0,800))  
 
 --------------------------------------------------------------------------------
   #aquisisco il genere femminile  
@@ -240,7 +273,7 @@ conteggio_LSDU<-table(LSD_genereU)
 conteggi_consumi13<-rbind(Femminile=conteggio_LSDF,Maschile=conteggio_LSDU)
 View(conteggi_consumi13)
 #creo un barplot del conteggio del consumo delle amphet
-barplot(conteggi_consumi13,main="Confronto dei consumi tra generi",xlab = "Tipo di consumo",ylab = "Frequenza",col = c("pink","blue"),legend.text = rownames(conteggi_consumi13),args.legend = list(title = "Genere", x = "topright"),ylim = c(0,1800))  
+barplot(conteggi_consumi13,beside = TRUE,main="Confronto dei consumi tra generi",xlab = "Tipo di consumo",ylab = "Frequenza",col = c("pink","blue"),legend.text = rownames(conteggi_consumi13),args.legend = list(title = "Genere", x = "topright"),ylim = c(0,800))  
 
 --------------------------------------------------------------------------------
   #aquisisco il genere femminile  
@@ -254,7 +287,7 @@ conteggio_MethU<-table(Meth_genereU)
 conteggi_consumi14<-rbind(Femminile=conteggio_MethF,Maschile=conteggio_MethU)
 View(conteggi_consumi14)
 #creo un barplot del conteggio del consumo delle amphet
-barplot(conteggi_consumi14,main="Confronto dei consumi tra generi",xlab = "Tipo di consumo",ylab = "Frequenza",col = c("pink","blue"),legend.text = rownames(conteggi_consumi14),args.legend = list(title = "Genere", x = "topright"),ylim = c(0,1800))  
+barplot(conteggi_consumi14,beside = TRUE,main="Confronto dei consumi tra generi",xlab = "Tipo di consumo",ylab = "Frequenza",col = c("pink","blue"),legend.text = rownames(conteggi_consumi14),args.legend = list(title = "Genere", x = "topright"),ylim = c(0,1000))  
 
 --------------------------------------------------------------------------------
   #aquisisco il genere femminile  
@@ -268,7 +301,7 @@ conteggio_MushroomsU<-table(Mushrooms_genereU)
 conteggi_consumi15<-rbind(Femminile=conteggio_MushroomsF,Maschile=conteggio_MushroomsU)
 View(conteggi_consumi15)
 #creo un barplot del conteggio del consumo delle amphet
-barplot(conteggi_consumi15,main="Confronto dei consumi tra generi",xlab = "Tipo di consumo",ylab = "Frequenza",col = c("pink","blue"),legend.text = rownames(conteggi_consumi15),args.legend = list(title = "Genere", x = "topright"),ylim = c(0,1800))  
+barplot(conteggi_consumi15,beside = TRUE,main="Confronto dei consumi tra generi",xlab = "Tipo di consumo",ylab = "Frequenza",col = c("pink","blue"),legend.text = rownames(conteggi_consumi15),args.legend = list(title = "Genere", x = "topright"),ylim = c(0,800))  
 
 --------------------------------------------------------------------------------
   #aquisisco il genere femminile  
@@ -282,23 +315,24 @@ conteggio_NicotineU<-table(Nicotine_genereU)
 conteggi_consumi16<-rbind(Femminile=conteggio_NicotineF,Maschile=conteggio_NicotineU)
 View(conteggi_consumi16)
 #creo un barplot del conteggio del consumo delle amphet
-barplot(conteggi_consumi16,main="Confronto dei consumi tra generi",xlab = "Tipo di consumo",ylab = "Frequenza",col = c("pink","blue"),legend.text = rownames(conteggi_consumi16),args.legend = list(title = "Genere", x = "topright"),ylim = c(0,1800))  
+barplot(conteggi_consumi16,beside = TRUE,main="Confronto dei consumi tra generi",xlab = "Tipo di consumo",ylab = "Frequenza",col = c("pink","blue"),legend.text = rownames(conteggi_consumi16),args.legend = list(title = "Genere", x = "topright"),ylim = c(0,500))  
 
 --------------------------------------------------------------------------------
-  ## Aggiungere per gli Uomini la colonna CL3,per le femmine CL2 e CL4  
   
   #aquisisco il genere femminile  
   Semer_genereF<-subset(data_modifcato,data_modifcato$Gender=="Femmina",select = c(Gender,Semer))
 #aquisisco il genere maschile
 Semer_genereU<-subset(data_modifcato,data_modifcato$Gender=="Maschio",select = c(Gender,Semer))
+categorie_comuni2<- union(unique(Semer_genereF$Semer), unique(Semer_genereU$Semer))
+
 #creo una table sia per genere maschile che femminile
-conteggio_SemerF<-table(Semer_genereF)
-conteggio_SemerU<-table(Semer_genereU)
+conteggio_SemerF<-table(factor(Semer_genereF$Semer,levels = categorie_comuni2))
+conteggio_SemerU<-table(factor(Semer_genereU$Semer,levels = categorie_comuni2))
 #inserisco in una singola table i valori ripettivi alla frequenza delle due table
 conteggi_consumi17<-rbind(Femminile=conteggio_SemerF,Maschile=conteggio_SemerU)
 View(conteggi_consumi17)
 #creo un barplot del conteggio del consumo delle amphet
-barplot(conteggi_consumi17,main="Confronto dei consumi tra generi",xlab = "Tipo di consumo",ylab = "Frequenza",col = c("pink","blue"),legend.text = rownames(conteggi_consumi17),args.legend = list(title = "Genere", x = "topright"),ylim = c(0,1800))  
+barplot(conteggi_consumi17,beside=TRUE,main="Confronto dei consumi tra generi",xlab = "Tipo di consumo",ylab = "Frequenza",col = c("pink","blue"),legend.text = rownames(conteggi_consumi17),args.legend = list(title = "Genere", x = "topright"),ylim = c(0,1000))  
 
 --------------------------------------------------------------------------------
   #aquisisco il genere femminile  
@@ -312,6 +346,6 @@ conteggio_VSAU<-table(VSA_genereU)
 conteggi_consumi18<-rbind(Femminile=conteggio_VSAF,Maschile=conteggio_VSAU)
 View(conteggi_consumi18)
 #creo un barplot del conteggio del consumo delle amphet
-barplot(conteggi_consumi18,main="Confronto dei consumi tra generi",xlab = "Tipo di consumo",ylab = "Frequenza",col = c("pink","blue"),legend.text = rownames(conteggi_consumi18),args.legend = list(title = "Genere", x = "topright"),ylim = c(0,1800))  
+barplot(conteggi_consumi18,beside = TRUE,main="Confronto dei consumi tra generi",xlab = "Tipo di consumo",ylab = "Frequenza",col = c("pink","blue"),legend.text = rownames(conteggi_consumi18),args.legend = list(title = "Genere", x = "topright"),ylim = c(0,1000))  
 
-
+----------------------------------------------
