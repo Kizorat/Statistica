@@ -17,15 +17,9 @@ data$Country <- ifelse(data$Country == "-0.09765", "Australia",
 
 Paesi<-ordered(data$Country,levels=c("Australia","Canada","Nuova Zelanda","Altri","Irlanda","UK","USA"))
 table(Paesi)
-View(table(Paesi))
 
 tablePaesi<-table(Paesi)
-
-
-
-
-
-
+View(tablePaesi)
 # grafico a barre
 #png("Paesi_bar_chart.png", width = 800, height = 800, res = 150)
 barplot(tablePaesi,col =c("orange","green","blue","violet","red","yellow","grey"))
