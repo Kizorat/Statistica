@@ -423,4 +423,30 @@ View(conteggi_consumi18)
 #creo un barplot del conteggio del consumo delle amphet
 barplot(conteggi_consumi18,beside = TRUE,main="Confronto dei consumi tra generi",xlab = "Tipo di consumo",ylab = "Frequenza",col = c("pink","blue"),legend.text = rownames(conteggi_consumi18),args.legend = list(title = "Genere", x = "topright"),ylim = c(0,1000))  
 
+------------------------------------------------------------
 
+  #suddivido in base al genere tutte le droghe e cerco differenze tra uno e l'altro
+  Men_drug<-subset(data_modifcato,data_modifcato$Gender=="Maschio",select=c(Alcohol,Amphet,Amyl,Benzos,Caff,Cannabis,Choc,Coke,Ecstasy,Heroin,Ketamine,LSD,Meth,Mushrooms,Nicotine))
+  Woman_drug<-subset(data_modifcato,data_modifcato$Gender=="Femmina",select=c(Alcohol,Amphet,Amyl,Benzos,Caff,Cannabis,Choc,Coke,Ecstasy,Heroin,Ketamine,LSD,Meth,Mushrooms,Nicotine))
+ 
+  #creazione della table dai dati su tutti gli uomini che utilizzano droghe
+  risultati_men<-lapply(Men_drug, table)
+  #creazione delle table dai dati su tutte le donne che utilizzano droghe
+  risultati_woman<-lapply(Woman_drug,table)
+  View(risultati_men)
+  View(risultati_woman)
+  #seleziona le colonne numeriche
+  risultati_numerici_men<-risultati_men[sapply(risultati_men,is.numeric)]
+  risultati_numerici_woman<-risultati_woman[sapply(risultati_woman,is.numeric)]
+  #creazione di un boxplot stat per poter leggere per entrabe i dati relativi al boxplot
+  boxplot_stats_men <- lapply(risultati_numerici_men, boxplot.stats)
+  boxplot_stats_woman<-lapply(risultati_numerici_woman, boxplot_stats)
+  View(boxplot_stats_men)
+  #creazione del boxplot e identificazione degli autlier
+  boxplot(risultati_men,notch = FALSE,main="Droghe sugli uomini",ylab="Frequenza assoluta",las=2,col=rainbow(15))
+  boxplot(risultati_woman,notch = FALSE,main="Droghe sulle donne",ylab="Frequenza assoluta",las=2,col=rainbow(15))
+  
+  
+  
+  
+  

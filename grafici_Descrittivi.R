@@ -161,4 +161,4 @@ dev.off()
   # Chiudere il dispositivo grafico
   dev.off()
   
->>>>>>> 9bd6823bad9e16f69cafc9acafb13dcd6b0735df
+
