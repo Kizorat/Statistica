@@ -14,7 +14,9 @@ write.csv(data, "drug_consumption_modificato.csv", row.names = FALSE)
 #stampo nuovo csv
 data_modifcato<-read.csv("drug_consumption_modificato.csv",sep=",",header = T)
 View(data_modifcato)
-
+country<-subset(data_modifcato,data_modifcato$Country== -0.46841,select = c(Country))
+country2<-subset(data_modifcato,data_modifcato$Country== 0.96082,select = c(Country))
+View(country2)
 #Acquisisco solo coloro che si trovano in un range di età superiore a 65
 genere_eta<-subset(data_modifcato,data_modifcato$Age>65,select = c(Age,Gender))
 genere_eta2<-subset(data_modifcato,data_modifcato$Age>54 & data_modifcato$Age<65,select = c(Age,Gender))
@@ -56,8 +58,12 @@ pie(conteggio_generi6,labels = names(conteggio_generi6),main="Grafico sulle cate
   
   #aquisisco il genere femminile  
   Alcohol_genereF<-subset(data_modifcato,data_modifcato$Gender=="Femmina",select = c(Gender,Alcohol))
+#descrizione di Alcohol per genere femminile
+describe(Alcohol_genereF)
 #aquisisco il genere maschile
 Alcohol_genereU<-subset(data_modifcato,data_modifcato$Gender=="Maschio",select = c(Gender,Alcohol))
+#descrizione di Alcohol per genere maschile
+describe(Alcohol_genereU)
 #creo una table sia per genere maschile che femminile
 conteggio_AlcoholF<-table(Alcohol_genereF)
 conteggio_AlcoholU<-table(Alcohol_genereU)
@@ -70,8 +76,12 @@ barplot(conteggi_consumi,beside = TRUE,main="Confronto dei consumi tra generi",x
 -----------------------------------------
 #aquisisco il genere femminile  
 Amphet_genereF<-subset(data_modifcato,data_modifcato$Gender=="Femmina",select = c(Gender,Amphet))
+#descrizione di Amphet per genere femminile
+describe(Amphet_genereF)
 #aquisisco il genere maschile
 Amphet_genereU<-subset(data_modifcato,data_modifcato$Gender=="Maschio",select = c(Gender,Amphet))
+#descrizione di Amphet per genere maschile
+describe(Amphet_genereU)
 #creo una table sia per genere maschile che femminile
 conteggio_AmphetF<-table(Amphet_genereF)
 conteggio_AmphetU<-table(Amphet_genereU)
@@ -82,10 +92,14 @@ View(conteggi_consumi2)
 barplot(conteggi_consumi2,beside = TRUE,main="Confronto dei consumi tra generi",xlab = "Tipo di consumo",ylab = "Frequenza",col = c("pink","blue"),legend.text = rownames(conteggi_consumi2),args.legend = list(title = "Genere", x = "topright"),ylim = c(0,600))
 ----------------------------------------------------
   
-  #aquisisco il genere femminile  
-  Amyl_genereF<-subset(data_modifcato,data_modifcato$Gender=="Femmina",select = c(Gender,Amyl))
+#aquisisco il genere femminile  
+Amyl_genereF<-subset(data_modifcato,data_modifcato$Gender=="Femmina",select = c(Gender,Amyl))
+#Descrizoone di Amyl per genere femminile
+describe(Amyl_genereF)
 #aquisisco il genere maschile
 Amyl_genereU<-subset(data_modifcato,data_modifcato$Gender=="Maschio",select = c(Gender,Amyl))
+#descrizoone di Amyl per genere maschile
+describe(Amyl_genereU)
 categorie_comuni3 <- union(unique(Amyl_genereF$Amyl), unique(Amyl_genereU$Amyl))
 #creo una table sia per genere maschile che femminile
 conteggio_AmylF<-table(factor(Amyl_genereF$Amyl,levels = categorie_comuni3))
@@ -98,8 +112,12 @@ barplot(conteggi_consumi3,beside=TRUE,main="Confronto dei consumi tra generi",xl
 ----------------------------------------------------
   #aquisisco il genere femminile  
   Benzos_genereF<-subset(data_modifcato,data_modifcato$Gender=="Femmina",select = c(Gender,Benzos))
+#descrizione del Benzos sul genere femminile
+describe(Benzos_genereF)
 #aquisisco il genere maschile
 Benzos_genereU<-subset(data_modifcato,data_modifcato$Gender=="Maschio",select = c(Gender,Benzos))
+#descrizione del Benzos sul genere mashile
+describe(Benzos_genereU)
 #creo una table sia per genere maschile che femminile
 conteggio_BenzosF<-table(Benzos_genereF)
 conteggio_BenzosU<-table(Benzos_genereU)
@@ -111,8 +129,12 @@ barplot(conteggi_consumi4,beside = TRUE,main="Confronto dei consumi tra generi",
 ----------------------------------------------
   #aquisisco il genere femminile  
   Caff_genereF<-subset(data_modifcato,data_modifcato$Gender=="Femmina",select = c(Gender,Caff))
+#descrizione del Caff sul genere femminile
+describe(Caff_genereF)
 #aquisisco il genere maschile
 Caff_genereU<-subset(data_modifcato,data_modifcato$Gender=="Maschio",select = c(Gender,Caff))
+#descrizione del Caff sul genere maschile
+describe(Caff_genereU)
 #creo una table sia per genere maschile che femminile
 conteggio_CaffF<-table(Caff_genereF)
 conteggio_CaffU<-table(Caff_genereU)
@@ -124,8 +146,12 @@ barplot(conteggi_consumi5,beside=TRUE,main="Confronto dei consumi tra generi",xl
 ---------------------------------------------------------------------------
   #aquisisco il genere femminile  
   Cannabis_genereF<-subset(data_modifcato,data_modifcato$Gender=="Femmina",select = c(Gender,Cannabis))
+#descrizione della Cannabis sul genere femminile
+describe(Cannabis_genereF)
 #aquisisco il genere maschile
 Cannabis_genereU<-subset(data_modifcato,data_modifcato$Gender=="Maschio",select = c(Gender,Cannabis))
+#descrizione della Cannabis sul genere maschile 
+describe(Cannabis_genereU)
 #creo una table sia per genere maschile che femminile
 conteggio_CannabisF<-table(Cannabis_genereF)
 conteggio_CannabisU<-table(Cannabis_genereU)
@@ -136,13 +162,14 @@ View(conteggi_consumi6)
 barplot(conteggi_consumi6,beside=TRUE,main="Confronto dei consumi tra generi",xlab = "Tipo di consumo",ylab = "Frequenza",col = c("pink","blue"),legend.text = rownames(conteggi_consumi6),args.legend = list(title = "Genere", x = "topright"),ylim = c(0,500))
 ---------------------------------------------------------------------------
   
- 
-  
-  
-  #aquisisco il genere femminile  
-  Choc_genereF<-subset(data_modifcato,data_modifcato$Gender=="Femmina",select = c(Gender,Choc))
+#aquisisco il genere femminile  
+Choc_genereF<-subset(data_modifcato,data_modifcato$Gender=="Femmina",select = c(Gender,Choc))
+#descrizione della Choc sul genere femminile
+describe(Choc_genereF)
 #aquisisco il genere maschile
 Choc_genereU<-subset(data_modifcato,data_modifcato$Gender=="Maschio",select = c(Gender,Choc))
+#descrizione della Choc sul genere maschile
+describe(Choc_genereU)
 # Creare le tabelle di frequenza con tutte le categorie presenti
 categorie_comuni <- union(unique(Choc_genereF$Choc), unique(Choc_genereU$Choc))
 #creo una table sia per genere maschile che femminile
@@ -154,10 +181,14 @@ View(conteggi_consumi7)
 #creo un barplot del conteggio del consumo delle amphet
 barplot(conteggi_consumi7,beside=TRUE,main="Confronto dei consumi tra generi",xlab = "Tipo di consumo",ylab = "Frequenza",col = c("pink","blue"),legend.text = rownames(conteggi_consumi7),args.legend = list(title = "Genere", x = "topright"),ylim = c(0,500))
 ---------------------------------------------------------------------------
-  #aquisisco il genere femminile  
-  Coke_genereF<-subset(data_modifcato,data_modifcato$Gender=="Femmina",select = c(Gender,Coke))
+#aquisisco il genere femminile  
+Coke_genereF<-subset(data_modifcato,data_modifcato$Gender=="Femmina",select = c(Gender,Coke))
+#descrizione della Coke sul genere femminile 
+describe(Coke_genereF)
 #aquisisco il genere maschile
 Coke_genereU<-subset(data_modifcato,data_modifcato$Gender=="Maschio",select = c(Gender,Coke))
+#descrizione della Coke sul genere maschile
+describe(Coke_genereU)
 #creo una table sia per genere maschile che femminile
 conteggio_CokeF<-table(Coke_genereF)
 conteggio_CokeU<-table(Coke_genereU)
@@ -171,8 +202,12 @@ barplot(conteggi_consumi7,beside=TRUE,main="Confronto dei consumi tra generi",xl
   
   #aquisisco il genere femminile  
   Crack_genereF<-subset(data_modifcato,data_modifcato$Gender=="Femmina",select = c(Gender,Crack))
+#descrizione della Crack sul genere femminile
+describe(Crack_genereF)
 #aquisisco il genere maschile
 Crack_genereU<-subset(data_modifcato,data_modifcato$Gender=="Maschio",select = c(Gender,Crack))
+#descrizione della Crack sul genere maschile
+describe(Crack_genereU)
 livelli_crack <- union(unique(Crack_genereF$Crack), unique(Crack_genereU$Crack))
 print(livelli_crack)
 # Converti in data.frame con livelli uniformi
@@ -206,8 +241,12 @@ barplot(as.matrix(conteggi_consumi_wide_df),beside=TRUE,main="Confronto dei cons
   
   #aquisisco il genere femminile  
   Ecstasy_genereF<-subset(data_modifcato,data_modifcato$Gender=="Femmina",select = c(Gender,Ecstasy))
+#descrizine della ecstasy sul genere femminile
+describe(Ecstasy_genereF)
 #aquisisco il genere maschile
 Ecstasy_genereU<-subset(data_modifcato,data_modifcato$Gender=="Maschio",select = c(Gender,Ecstasy))
+#descrizione della ecstasy sul genere maschile
+describe(Ecstasy_genereU)
 #creo una table sia per genere maschile che femminile
 conteggio_EcstasyF<-table(Ecstasy_genereF)
 conteggio_EcstasyU<-table(Ecstasy_genereU)
@@ -220,8 +259,12 @@ barplot(conteggi_consumi9,beside = TRUE,main="Confronto dei consumi tra generi",
   
   #aquisisco il genere femminile  
   Heroin_genereF<-subset(data_modifcato,data_modifcato$Gender=="Femmina",select = c(Gender,Heroin))
+#descrizione del Heroin sul genere femminile
+describe(Heroin_genereF)
 #aquisisco il genere maschile
 Heroin_genereU<-subset(data_modifcato,data_modifcato$Gender=="Maschio",select = c(Gender,Heroin))
+#descrizione del Heroin sul genere maschile
+describe(Heroin_genereU)
 #creo una table sia per genere maschile che femminile
 conteggio_HeroinF<-table(Heroin_genereF)
 conteggio_HeroinU<-table(Heroin_genereU)
@@ -235,8 +278,12 @@ barplot(conteggi_consumi10,beside = TRUE,main="Confronto dei consumi tra generi"
   
   #aquisisco il genere femminile  
   Ketamine_genereF<-subset(data_modifcato,data_modifcato$Gender=="Femmina",select = c(Gender,Ketamine))
+#descrizione della Ketamine sul genere femminile
+describe(Ketamine_genereF)
 #aquisisco il genere maschile
 Ketamine_genereU<-subset(data_modifcato,data_modifcato$Gender=="Maschio",select = c(Gender,Ketamine))
+#descrizione della ketamine sul genere maschile
+describe(Ketamine_genereU)
 #creo una table sia per genere maschile che femminile
 conteggio_KetamineF<-table(Ketamine_genereF)
 conteggio_KetamineU<-table(Ketamine_genereU)
@@ -250,8 +297,12 @@ barplot(conteggi_consumi11,beside = TRUE,main="Confronto dei consumi tra generi"
   
   #aquisisco il genere femminile  
   Legalh_genereF<-subset(data_modifcato,data_modifcato$Gender=="Femmina",select = c(Gender,Legalh))
+#descrizione della Legalh sul genere femminile
+describe(Legalh_genereF)
 #aquisisco il genere maschile
 Legalh_genereU<-subset(data_modifcato,data_modifcato$Gender=="Maschio",select = c(Gender,Legalh))
+#descrizione della Legalh sul genere maschile
+describe(Legalh_genereU)
 #creo una table sia per genere maschile che femminile
 conteggio_LegalhF<-table(Legalh_genereF)
 conteggio_LegalhU<-table(Legalh_genereU)
@@ -264,8 +315,12 @@ barplot(conteggi_consumi12,beside = TRUE,main="Confronto dei consumi tra generi"
 --------------------------------------------------------------------------------
   #aquisisco il genere femminile  
   LSD_genereF<-subset(data_modifcato,data_modifcato$Gender=="Femmina",select = c(Gender,LSD))
+#descrizione della LSD sul genere femminile
+describe(LSD_genereF)
 #aquisisco il genere maschile
 LSD_genereU<-subset(data_modifcato,data_modifcato$Gender=="Maschio",select = c(Gender,LSD))
+#descrizione della LSD sul genere maschile
+describe(LSD_genereU)
 #creo una table sia per genere maschile che femminile
 conteggio_LSDF<-table(LSD_genereF)
 conteggio_LSDU<-table(LSD_genereU)
@@ -278,8 +333,12 @@ barplot(conteggi_consumi13,beside = TRUE,main="Confronto dei consumi tra generi"
 --------------------------------------------------------------------------------
   #aquisisco il genere femminile  
   Meth_genereF<-subset(data_modifcato,data_modifcato$Gender=="Femmina",select = c(Gender,Meth))
+#descrizione della Meth sul genere femminile
+describe(Meth_genereF)
 #aquisisco il genere maschile
 Meth_genereU<-subset(data_modifcato,data_modifcato$Gender=="Maschio",select = c(Gender,Meth))
+#descrizione della Meth sul genere maschile
+describe(Meth_genereU)
 #creo una table sia per genere maschile che femminile
 conteggio_MethF<-table(Meth_genereF)
 conteggio_MethU<-table(Meth_genereU)
@@ -292,8 +351,12 @@ barplot(conteggi_consumi14,beside = TRUE,main="Confronto dei consumi tra generi"
 --------------------------------------------------------------------------------
   #aquisisco il genere femminile  
   Mushrooms_genereF<-subset(data_modifcato,data_modifcato$Gender=="Femmina",select = c(Gender,Mushrooms))
+#descrizione della Mushrooms sul genere femminile
+describe(Mushrooms_genereF)
 #aquisisco il genere maschile
 Mushrooms_genereU<-subset(data_modifcato,data_modifcato$Gender=="Maschio",select = c(Gender,Mushrooms))
+#descrizione della Mushrooms sul genere maschile
+describe(Mushrooms_genereU)
 #creo una table sia per genere maschile che femminile
 conteggio_MushroomsF<-table(Mushrooms_genereF)
 conteggio_MushroomsU<-table(Mushrooms_genereU)
@@ -306,8 +369,12 @@ barplot(conteggi_consumi15,beside = TRUE,main="Confronto dei consumi tra generi"
 --------------------------------------------------------------------------------
   #aquisisco il genere femminile  
   Nicotine_genereF<-subset(data_modifcato,data_modifcato$Gender=="Femmina",select = c(Gender,Nicotine))
+#descrizione della Nicotine sul genere femminile
+describe(Nicotine_genereF)
 #aquisisco il genere maschile
 Nicotine_genereU<-subset(data_modifcato,data_modifcato$Gender=="Maschio",select = c(Gender,Nicotine))
+#descrizione della Nicotina sul genere maschile
+describe(Nicotine_genereU)
 #creo una table sia per genere maschile che femminile
 conteggio_NicotineF<-table(Nicotine_genereF)
 conteggio_NicotineU<-table(Nicotine_genereU)
@@ -321,8 +388,12 @@ barplot(conteggi_consumi16,beside = TRUE,main="Confronto dei consumi tra generi"
   
   #aquisisco il genere femminile  
   Semer_genereF<-subset(data_modifcato,data_modifcato$Gender=="Femmina",select = c(Gender,Semer))
+#descrizione del Semer sul genere femminile
+describe(Nicotine_genereF)
 #aquisisco il genere maschile
 Semer_genereU<-subset(data_modifcato,data_modifcato$Gender=="Maschio",select = c(Gender,Semer))
+#desrizione del Semer sul genere maschile
+describe(Semer_genereU)
 categorie_comuni2<- union(unique(Semer_genereF$Semer), unique(Semer_genereU$Semer))
 
 #creo una table sia per genere maschile che femminile
@@ -337,8 +408,12 @@ barplot(conteggi_consumi17,beside=TRUE,main="Confronto dei consumi tra generi",x
 --------------------------------------------------------------------------------
   #aquisisco il genere femminile  
   VSA_genereF<-subset(data_modifcato,data_modifcato$Gender=="Femmina",select = c(Gender,VSA))
+#descrizione del VSA sul genere femminile
+describe(VSA_genereF)
 #aquisisco il genere maschile
 VSA_genereU<-subset(data_modifcato,data_modifcato$Gender=="Maschio",select = c(Gender,VSA))
+#descrizione del VSA sul genere maschile
+describe(VSA_genereU)
 #creo una table sia per genere maschile che femminile
 conteggio_VSAF<-table(VSA_genereF)
 conteggio_VSAU<-table(VSA_genereU)
@@ -348,4 +423,30 @@ View(conteggi_consumi18)
 #creo un barplot del conteggio del consumo delle amphet
 barplot(conteggi_consumi18,beside = TRUE,main="Confronto dei consumi tra generi",xlab = "Tipo di consumo",ylab = "Frequenza",col = c("pink","blue"),legend.text = rownames(conteggi_consumi18),args.legend = list(title = "Genere", x = "topright"),ylim = c(0,1000))  
 
-----------------------------------------------
+------------------------------------------------------------
+
+  #suddivido in base al genere tutte le droghe e cerco differenze tra uno e l'altro
+  Men_drug<-subset(data_modifcato,data_modifcato$Gender=="Maschio",select=c(Alcohol,Amphet,Amyl,Benzos,Caff,Cannabis,Choc,Coke,Ecstasy,Heroin,Ketamine,LSD,Meth,Mushrooms,Nicotine))
+  Woman_drug<-subset(data_modifcato,data_modifcato$Gender=="Femmina",select=c(Alcohol,Amphet,Amyl,Benzos,Caff,Cannabis,Choc,Coke,Ecstasy,Heroin,Ketamine,LSD,Meth,Mushrooms,Nicotine))
+ 
+  #creazione della table dai dati su tutti gli uomini che utilizzano droghe
+  risultati_men<-lapply(Men_drug, table)
+  #creazione delle table dai dati su tutte le donne che utilizzano droghe
+  risultati_woman<-lapply(Woman_drug,table)
+  View(risultati_men)
+  View(risultati_woman)
+  #seleziona le colonne numeriche
+  risultati_numerici_men<-risultati_men[sapply(risultati_men,is.numeric)]
+  risultati_numerici_woman<-risultati_woman[sapply(risultati_woman,is.numeric)]
+  #creazione di un boxplot stat per poter leggere per entrabe i dati relativi al boxplot
+  boxplot_stats_men <- lapply(risultati_numerici_men, boxplot.stats)
+  boxplot_stats_woman<-lapply(risultati_numerici_woman, boxplot_stats)
+  View(boxplot_stats_men)
+  #creazione del boxplot e identificazione degli autlier
+  boxplot(risultati_men,notch = FALSE,main="Droghe sugli uomini",ylab="Frequenza assoluta",las=2,col=rainbow(15))
+  boxplot(risultati_woman,notch = FALSE,main="Droghe sulle donne",ylab="Frequenza assoluta",las=2,col=rainbow(15))
+  
+  
+  
+  
+  

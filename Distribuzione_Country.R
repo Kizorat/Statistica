@@ -20,9 +20,9 @@ data$Country <- ifelse(data$Country == "-0.09765", "Australia",
 
 Paesi<-ordered(data$Country,levels=c("Australia","Canada","Nuova_Zelanda","Altri","Irlanda","UK","USA"))
 table(Paesi)
-View(table(Paesi))
 
 tablePaesi<-table(Paesi)
+View(tablePaesi)
 
 
 
